@@ -1,0 +1,15 @@
+images:
+  - tag: 'repo/foo:version'
+    url: 'git@github.com:foo/foo.git'
+    path: 'path/to/foo/' # Contains the Dockerfile
+    build:
+      before: './configure.sh'
+      after: './notify.sh'
+      cache: false
+  - tag: 'bar'
+    url: 'github.com/foo/bar'
+    path: 'path/to/bar/' # Contains the Dockerfile
+    build:
+      before: './configure.sh'
+      after: './notify.sh'
+      cache: false
