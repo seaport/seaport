@@ -7,7 +7,6 @@ import (
 
 
 func main() {
-
   b, err := ioutil.ReadFile("./Seaport.example")
   if err != nil {
     fmt.Print(err)
@@ -18,6 +17,9 @@ func main() {
     fmt.Print(err)
   }
 
-  fmt.Print(images)
+  f, _ := NewFactory("unix://var/run/docker.sock")
 
+  for _, i := range images {
+    f.Build(i)
+  }
 }

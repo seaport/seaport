@@ -16,6 +16,7 @@ type ImageBuildConfig struct {
   Before string
   After string
   Cache bool
+  Path string
 }
 
 // data => YAML content
@@ -25,7 +26,4 @@ func ImageList(data []byte) ([]*Image, error) {
   err := yaml.Unmarshal(data, &config)
 
   return config["images"], err
-}
-
-func (i *Image) Checkout() (string, error){
 }
