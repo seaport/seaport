@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 
 	"github.com/dotcloud/docker/archive"
@@ -33,6 +35,23 @@ func NewFactory(endpoint string) (*Factory, error) {
 }
 
 func (f *Factory) Build(img *Image) bool {
+	p, err := filepath.Abs(img.Path)
+	if err != nil {
+		log.Fatal(err)
+		return false
+	}
+
+	if _, err := os.Stat(filepath.Join(p, "Dockerfile")); err != nil {
+		log.Fatal("There is no Docker file in %v or is not accessible", p)
+		log.Fatal(err)
+		return false
+	}
+
+	if err := os.Chdir(p); err != nil {
+		log.Fatal(err)
+		return false
+	}
+
 	log.Println("Executing the before command...")
 	if err := execute(img.Build.Before); err != nil {
 		log.Fatal(err)
