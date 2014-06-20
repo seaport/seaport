@@ -42,7 +42,7 @@ func (f *Factory) Build(img *Image) bool {
 	}
 
 	if _, err := os.Stat(filepath.Join(p, "Dockerfile")); err != nil {
-		log.Fatal("There is no Docker file in %v or is not accessible", p)
+		log.Fatalf("There is no Docker file in %v or is not accessible", p)
 		log.Fatal(err)
 		return false
 	}
