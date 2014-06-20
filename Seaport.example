@@ -2,14 +2,8 @@ images:
   - tag: 'repo/foo:version'
     uri: 'https://github.com/fcsonline/nodestalgia'
     context: 'path/to/foo/' # Contains the Dockerfile
+    path: '/path/to/dockerimage/context'
     build:
       before: 'touch before1'
       after: 'touch after1'
-      cache: false
-  - tag: 'bar'
-    uri: 'http://github.com/karver/karver'
-    context: 'path/to/bar/' # Contains the Dockerfile
-    build:
-      before: 'touch before2'
-      after: 'touch after2'
       cache: false
